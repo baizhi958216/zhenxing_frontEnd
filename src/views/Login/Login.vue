@@ -26,7 +26,7 @@
             name="password"
             :width="400"
             :value="password"
-            type="password"
+            :password="true"
             placeholder="********"
             @i_changeVal="i_password"
           />

@@ -1,65 +1,56 @@
 <template>
   <view class="i_warp">
     <image
-      v-if="type === 'password'"
+      v-if="password"
       style="width: 30rpx; height: 30rpx; background-color: #eeeeee"
       mode="scaleToFill"
       :src="TeaFile('login', 'lock.png')"
       @error="imageError"
     />
     <input
-      :class="iClass"
-      :type="itype"
+      :password="vpassword"
       :placeholder="placeholder"
       :style="{ width: width + 'rpx', height: height + 'rpx' }"
       placeholder-class="i_common_placeholder"
       @input="$emit('i_changeVal', $event)"
     />
-    <image
-      v-if="type === 'password'"
-      style="width: 45rpx; height: 45rpx; background-color: #eeeeee"
-      mode="scaleToFill"
-      :src="TeaFile('login', 'eye.png')"
+    <view
+      v-if="password"
+      :style="{
+        backgroundImage: `url(${
+          vpassword
+            ? `${TeaFile('login', 'eye.png')}`
+            : `${TeaFile('login', 'eye_open.png')}`
+        })`,
+        width: '45rpx',
+        height: '45rpx',
+      }"
       @click="psw2txt"
-      @error="imageError"
-    />
+    ></view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { TeaFile } from "@/includes/GiteaImageDisk";
 interface InterfaceInput {
-  type?: string;
   width?: number;
   height?: number;
   placeholder?: string;
+  password?: boolean;
 }
 const props = withDefaults(defineProps<InterfaceInput>(), {
-  type: "text",
+  password: false,
 });
-const itype = ref(props.type);
+// 密码显示隐藏
+const vpassword = ref(props.password);
 const psw2txt = () => {
-  if (itype.value == "text") {
-    itype.value = "password";
+  if (vpassword.value) {
+    vpassword.value = false;
   } else {
-    itype.value = "text";
+    vpassword.value = true;
   }
 };
-
-let iClass = computed(() => {
-  let i_class = "";
-  switch (props.type) {
-    case "password":
-      i_class = "i_common i_password";
-      break;
-    default:
-      i_class = "i_common i_default";
-      break;
-  }
-  return i_class;
-});
-
 const imageError = (err: any) => {
   console.log(err);
 };
