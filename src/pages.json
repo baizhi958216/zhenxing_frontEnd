@@ -1,0 +1,19 @@
+{
+  "pages": [
+    {
+      "path": "views/Home/Home"
+    },
+    {
+      "path": "views/Login/Login"
+    },
+    {
+      "path": "views/Register/Register"
+    },
+    {
+      "path": "views/Login/SMSLogin"
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "custom"
+  }
+}
