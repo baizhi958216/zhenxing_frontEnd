@@ -8,6 +8,7 @@
       @error="imageError"
     />
     <input
+      :value="vvalue"
       :password="vpassword"
       :placeholder="placeholder"
       :style="{ width: width + 'rpx', height: height + 'rpx' }"
@@ -38,12 +39,18 @@ interface InterfaceInput {
   height?: number;
   placeholder?: string;
   password?: boolean;
+  value?: string | number;
 }
+
 const props = withDefaults(defineProps<InterfaceInput>(), {
   password: false,
+  value: "",
 });
+
 // 密码显示隐藏
 const vpassword = ref(props.password);
+const vvalue = ref(props.value);
+
 const psw2txt = () => {
   if (vpassword.value) {
     vpassword.value = false;

@@ -81,11 +81,13 @@ import ValidationTemplate from "@/components/ValidationTemplate.vue";
 import YInput from "@/components/YunBase/YInput/YInput.vue";
 import YButton from "@/components/YunBase/YButton/YButton.vue";
 import useUserStore from "@/stores/user";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import type { IAuthData, IUserData } from "@/includes/User.interface";
 const store = useUserStore();
-const account = ref();
-const password = ref();
+const account = ref<string | number>();
+const password = ref<string | number>();
 const userAutoLogin = ref(store.userAutoLogin);
+
 const i_account = (e: InputEvent) => {
   account.value = (<HTMLInputElement>e.target).value;
 };
@@ -98,14 +100,79 @@ const changeAutoLogin = () => {
   userAutoLogin.value = !userAutoLogin.value;
 };
 
-const submit = () => {
-  if (userAutoLogin.value) {
-    store.userAutoLogin = true;
-  } else {
-    store.userAutoLogin = false;
+// 监听自动登录修改
+watch(userAutoLogin, (newVal) => {
+  store.userAutoLogin = newVal;
+});
+
+const submit = async () => {
+  // 账号密码不能为空
+  if (!(account.value && password.value)) {
+    uni.showModal({
+      title: "提示",
+      content: "请填写账号和密码",
+    });
+    return;
   }
-  console.log(account.value, password.value, userAutoLogin.value);
+  // 登录
+  await store
+    .authenticate({
+      user_account: account.value as string,
+      user_psw: password.value as string,
+    })
+    .then((res: IAuthData) => {
+      switch (res.code) {
+        case 0:
+          // 密码错误
+          uni.showModal({
+            title: "提示",
+            content: "密码错误",
+          });
+          break;
+        case 1:
+          // 登录成功
+          return res;
+        case 2:
+          // 账号不存在
+          uni.showModal({
+            title: "提示",
+            content: "该账号不存在",
+          });
+          break;
+
+        default:
+          // 未知错误
+          uni.showModal({
+            title: "提示",
+            content: "未知错误",
+          });
+          break;
+      }
+    })
+    .then((res) => {
+      if (res?.code == 1) {
+        store.userLoggedIn = true;
+        store.userData = {
+          userId: res.data!.userId,
+          userPhoto: res.data!.userPhoto,
+          userPhone: res.data!.userPhone,
+          userPwd: password.value as string,
+        };
+        uni.reLaunch({
+          url: "/views/Home/Home",
+        });
+      }
+    });
 };
+
+// 自动登录
+if (store.userLoggedIn) {
+  account.value = store.userData.userPhone;
+  password.value = store.userData.userPwd;
+  if (store.userAutoLogin) {
+    submit();
+  }
+}
 </script>
 
 <style scoped>

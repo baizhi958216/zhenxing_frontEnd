@@ -12,6 +12,15 @@
           >注册</view
         >
         <view style="margin-bottom: 60rpx">
+          <view>用户名</view>
+          <y-input
+            name="username"
+            :value="username"
+            placeholder="用户名"
+            @i_changeVal="i_username"
+          />
+        </view>
+        <view style="margin-bottom: 60rpx">
           <view>账号</view>
           <y-input
             name="account"
@@ -59,14 +68,22 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import ValidationTemplate from "@/components/ValidationTemplate.vue";
 import YInput from "@/components/YunBase/YInput/YInput.vue";
 import YButton from "@/components/YunBase/YButton/YButton.vue";
-import { ref } from "vue";
+import useUserStore from "@/stores/user";
+import type { IRegisterData } from "@/includes/User.interface";
 
+const user = useUserStore();
+const username = ref();
 const account = ref();
 const password = ref();
 const repassword = ref();
+
+const i_username = (e: InputEvent) => {
+  username.value = (<HTMLInputElement>e.target).value;
+};
 
 const i_account = (e: InputEvent) => {
   account.value = (<HTMLInputElement>e.target).value;
@@ -80,8 +97,48 @@ const i_repassword = (e: InputEvent) => {
   repassword.value = (<HTMLInputElement>e.target).value;
 };
 
-const submit = () => {
-  console.log(account.value, password.value, repassword.value);
+const submit = async () => {
+  if (password.value != repassword.value) {
+    uni.showModal({
+      title: "提示",
+      content: "两次输入密码不一致",
+    });
+    return;
+  }
+  await user
+    .register({
+      user_name: username.value,
+      user_phone: account.value,
+      user_psw: password.value,
+      user_repsw: repassword.value,
+    })
+    .then((res: IRegisterData) => {
+      if (res.msg) {
+        uni.showModal({
+          title: "提示",
+          content: res.msg,
+        });
+      } else if (res.code) {
+        uni.showModal({
+          title: "提示",
+          content: "注册成功, 前往登录",
+          success: function (res) {
+            if (res.confirm) {
+              uni.navigateTo({
+                url: "/views/Login/Login",
+              });
+            } else if (res.cancel) {
+              console.log("用户点击取消");
+            }
+          },
+        });
+      } else {
+        uni.showModal({
+          title: "提示",
+          content: "未知错误",
+        });
+      }
+    });
 };
 </script>
 
