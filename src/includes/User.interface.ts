@@ -32,21 +32,54 @@ interface IUserData {
   userPhoto: string;
   userPwd: string;
 }
+
+// 账号不存在
+interface IAccountNotFound {
+  error: string;
+  path: string;
+  status: number;
+  timestamp: number;
+}
+
+// 密码错误
+interface IPasswordError {
+  code: number;
+  data: null;
+  map: {};
+  msg: string;
+}
+
+// 登录成功
+interface ILoginSuccess {
+  code: number;
+  data: IUserData;
+  map: {};
+  msg: null;
+}
+
 // 注册返回信息
 interface IRegisterData {
   code?: number;
   msg?: string;
 }
+
+// 消息头
+interface IHeader {
+  Connection: string;
+  "Content-Type": string;
+  Date: string;
+  Server: string;
+  "Set-Cookie": string;
+  "Transfer-Encoding": string;
+}
+
 // 登录返回信息
 interface IAuthData {
-  error?: string;
-  path?: string;
-  status?: number;
-  timestamp?: number;
-  code?: number;
-  msg?: string;
-  data?: IUserData;
-  map?: {};
+  cookies: Array<string>;
+  data: any;
+  errMsg: string;
+  header: IHeader;
+  statusCode: number;
 }
 
 export type {
@@ -54,6 +87,10 @@ export type {
   IAuthenticate,
   ISMSAuth,
   IUserData,
+  IAccountNotFound,
+  IPasswordError,
+  ILoginSuccess,
   IRegisterData,
+  IHeader,
   IAuthData,
 };

@@ -82,7 +82,6 @@ import YInput from "@/components/YunBase/YInput/YInput.vue";
 import YButton from "@/components/YunBase/YButton/YButton.vue";
 import useUserStore from "@/stores/user";
 import { ref, watch } from "vue";
-import type { IAuthData, IUserData } from "@/includes/User.interface";
 const store = useUserStore();
 const account = ref<string | number>();
 const password = ref<string | number>();
@@ -120,7 +119,7 @@ const submit = async () => {
       user_account: account.value as string,
       user_psw: password.value as string,
     })
-    .then((res: IAuthData) => {
+    .then((res) => {
       switch (res.code) {
         case 0:
           // 密码错误
@@ -150,12 +149,14 @@ const submit = async () => {
       }
     })
     .then((res) => {
-      if (res?.code == 1) {
+      if (res.code == 1) {
+        uni.setStorageSync("JSESSIONID", res.res.cookies[0]);
+        const { userId, userPhoto, userPhone } = res.res.data.data;
         store.userLoggedIn = true;
         store.userData = {
-          userId: res.data!.userId,
-          userPhoto: res.data!.userPhoto,
-          userPhone: res.data!.userPhone,
+          userId: userId,
+          userPhoto: userPhoto,
+          userPhone: userPhone,
           userPwd: password.value as string,
         };
         uni.reLaunch({
