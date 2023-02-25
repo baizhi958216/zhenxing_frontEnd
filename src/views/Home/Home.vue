@@ -20,10 +20,9 @@
       autoplay
       circular
     />
-    <y-carousel
-      :custom-info="featureItems"
+    <CardCarousel
+      :info="featureItems"
       :height="350"
-      custom
       dot-background="#eeeeee"
       select-dot-background="#575759"
       :dotstyle="'round'"
@@ -35,6 +34,7 @@
 import { onLoad } from "@dcloudio/uni-app";
 import HeaderView from "@/components/HeaderView.vue";
 import YCarousel from "@/components/YunBase/YCarousel/YCarousel.vue";
+import CardCarousel from "@/components/YunBase/YCarousel/CardCarousel.vue";
 import useUserStore from "@/stores/user";
 import useHomeStore from "@/stores/home";
 import type { IRecommend } from "@/includes/Home.interface";
