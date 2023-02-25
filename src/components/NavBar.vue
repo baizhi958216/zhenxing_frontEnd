@@ -2,44 +2,19 @@
   <view class="nb_wrap">
     <view class="nb_items">
       <view
+        v-for="el in navs"
+        :key="el.bg"
         :style="{
-          background: `url(${TeaFile('components/navigation', 'home.png')})`,
-          backgroundSize: '90%',
+          background: `url(${TeaFile(
+            'components/navigation',
+            `${el.bg}.png`
+          )})`,
+          backgroundSize: el.size,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }"
-        class="nb_home"
-        @click="toHome"
-      ></view>
-      <view
-        :style="{
-          background: `url(${TeaFile('components/navigation', 'search.png')})`,
-          backgroundSize: '90%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }"
-        class="nb_search"
-        @click="toSearch"
-      ></view>
-      <view
-        :style="{
-          background: `url(${TeaFile('components/navigation', 'message.png')})`,
-          backgroundSize: '110%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }"
-        class="nb_message"
-        @click="toMessage"
-      ></view>
-      <view
-        :style="{
-          background: `url(${TeaFile('components/navigation', 'me.png')})`,
-          backgroundSize: '90%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }"
-        class="nb_me"
-        @click="toMe"
+        class="nb_item_wrap"
+        @click="toNav(el.url)"
       ></view>
     </view>
   </view>
@@ -47,35 +22,43 @@
 
 <script setup lang="ts">
 import { TeaFile } from "@/includes/GiteaImageDisk";
-const toHome = () => {
-  if (getCurrentPages()[0].route != "views/Home/Home") {
-    uni.redirectTo({
-      url: "/views/Home/Home",
-    });
+import { reactive } from "vue";
+const navs = reactive(<Array<{ url: string; bg: string; size: string }>>[
+  {
+    url: "views/Home/Home",
+    bg: "home",
+    size: "90%",
+  },
+  {
+    url: "views/Search/Search",
+    bg: "search",
+    size: "90%",
+  },
+  {
+    url: "views/Message/Message",
+    bg: "message",
+    size: "110%",
+  },
+  {
+    url: "views/User/User",
+    bg: "me",
+    size: "90%",
+  },
+]);
+const toNav = (url: string) => {
+  if (getCurrentPages()[0].route != url) {
+    if (url == "views/Search/Search" || url == "views/User/User") {
+      uni.redirectTo({
+        url: `/${url}?back=false`,
+      });
+    } else {
+      uni.redirectTo({
+        url: `/${url}`,
+      });
+    }
   } else {
     return;
   }
-};
-const toSearch = () => {
-  if (getCurrentPages()[0].route != "views/Search/Search") {
-    uni.redirectTo({
-      url: "/views/Search/Search?back=false",
-    });
-  } else {
-    return;
-  }
-};
-const toMessage = () => {
-  if (getCurrentPages()[0].route != "views/Message/Message") {
-    uni.redirectTo({
-      url: "/views/Message/Message",
-    });
-  } else {
-    return;
-  }
-};
-const toMe = () => {
-  console.log("toMe");
 };
 </script>
 
@@ -93,10 +76,7 @@ const toMe = () => {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    .nb_home,
-    .nb_search,
-    .nb_message,
-    .nb_me {
+    .nb_item_wrap {
       width: 50rpx;
       height: 50rpx;
     }

@@ -36,6 +36,12 @@
       "style": {
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "views/User/User",
+      "style": {
+        "navigationBarTextStyle": "black"
+      }
     }
   ],
   "globalStyle": {
