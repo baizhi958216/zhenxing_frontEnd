@@ -8,10 +8,11 @@
       :style="{ top: `${top}px`, height: `${height}px` }"
       v-if="has_item"
     >
-      <view class="h_back">
+      <view v-if="has_back" class="h_back" @click="toBack">
         <uni-icons type="back" size="25" color="white"></uni-icons>
       </view>
-      <view class="h_title">
+      <view class="h_title" v-if="custom"><slot name="h_custom"></slot></view>
+      <view class="h_title" v-else>
         {{ title }}
       </view>
     </view>
@@ -23,14 +24,21 @@ withDefaults(
     title?: string;
     background?: string;
     has_item?: boolean;
+    custom?: boolean;
+    has_back?: boolean;
   }>(),
   {
     title: "",
     background: "white",
     has_item: false,
+    custom: false,
+    has_back: true,
   }
 );
 const { height, top } = uni.getMenuButtonBoundingClientRect();
+const toBack = () => {
+  uni.navigateBack();
+};
 </script>
 <style scoped lang="scss">
 .h_wrap {

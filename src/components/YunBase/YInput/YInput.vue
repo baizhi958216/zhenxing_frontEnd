@@ -70,8 +70,6 @@ const imageError = (err: any) => {
   padding: 0 5vw;
   align-items: center;
   background-color: #f0f0f0;
-  height: 80rpx;
-  width: 70vw;
   border-radius: 50rpx;
 }
 </style>

@@ -48,10 +48,22 @@
 <script setup lang="ts">
 import { TeaFile } from "@/includes/GiteaImageDisk";
 const toHome = () => {
-  console.log("toHome");
+  if (getCurrentPages()[0].route != "views/Home/Home") {
+    uni.redirectTo({
+      url: "/views/Home/Home",
+    });
+  } else {
+    return;
+  }
 };
 const toSearch = () => {
-  console.log("toSearch");
+  if (getCurrentPages()[0].route != "views/Search/Search") {
+    uni.redirectTo({
+      url: "/views/Search/Search?back=false",
+    });
+  } else {
+    return;
+  }
 };
 const toMessage = () => {
   console.log("toMessage");

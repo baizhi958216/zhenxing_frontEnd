@@ -23,6 +23,9 @@
     },
     {
       "path": "views/Attractions/Detail/Detail"
+    },
+    {
+      "path": "views/Search/Search"
     }
   ],
   "globalStyle": {
