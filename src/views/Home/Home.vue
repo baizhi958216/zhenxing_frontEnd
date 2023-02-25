@@ -28,7 +28,7 @@
       :dotstyle="'round'"
     />
     <view style="font-weight: bold; margin: 20rpx 0">最新推荐</view>
-    <template v-for="info in info1" :key="info.sid">
+    <view style="margin-bottom: 20rpx" v-for="info in info1" :key="info.sid">
       <y-card
         inner
         width="100%"
@@ -39,7 +39,7 @@
         <template #title>{{ info.title }}</template>
         <template #desc>{{ info.desc }}</template>
       </y-card>
-    </template>
+    </view>
   </view>
   <nav-bar />
 </template>
