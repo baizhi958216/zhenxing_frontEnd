@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad, onPullDownRefresh } from "@dcloudio/uni-app";
 import HeaderView from "@/components/HeaderView.vue";
 import YCarousel from "@/components/YunBase/YCarousel/YCarousel.vue";
 import CardCarousel from "@/components/YunBase/YCarousel/CardCarousel.vue";
@@ -109,14 +109,8 @@ const featureItems = reactive([
   },
 ]);
 
-const toSearch = (searchRecommend: string) => {
-  uni.navigateTo({
-    url: `/views/Search/Search?recommend=${searchRecommend}`,
-  });
-};
-
-if (!homeStore.topRecommend.length) {
-  homeStore.getRecommend().then((res: IRecommend) => {
+const getRecommend = async () => {
+  await homeStore.getRecommend().then((res: IRecommend) => {
     res.data.map((el) => {
       if (el.recommendLocation) {
         switch (el.recommendLocation) {
@@ -144,7 +138,25 @@ if (!homeStore.topRecommend.length) {
       }
     });
   });
+};
+const toSearch = (searchRecommend: string) => {
+  uni.navigateTo({
+    url: `/views/Search/Search?recommend=${searchRecommend}`,
+  });
+};
+
+if (!homeStore.topRecommend.length) {
+  getRecommend();
 }
+
+onPullDownRefresh(async () => {
+  setTimeout(function () {
+    uni.stopPullDownRefresh();
+  }, 500);
+  homeStore.bottomRecommend = [];
+  homeStore.topRecommend = [];
+  await getRecommend();
+});
 </script>
 
 <style scoped lang="scss">
