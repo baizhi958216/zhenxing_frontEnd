@@ -16,7 +16,7 @@
       @change="change"
       :style="{
         height: height + 'vh',
-        width: `${width ? width + 'vw' : '100vw'}`,
+        width: `${width ? width + '%' : '100%'}`,
       }"
       autoplay
       circular
@@ -85,7 +85,6 @@ const navto = (sid: string) => {
 }
 .c_swiper-item {
   height: 85%;
-  width: 90%;
   margin: 0 auto;
 }
 .c_shadow {

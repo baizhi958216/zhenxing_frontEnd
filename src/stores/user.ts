@@ -12,6 +12,7 @@ export default defineStore("user", {
     userLoggedIn: false,
     userAutoLogin: false,
     userData: { userId: "", userPhone: "", userPwd: "", userPhoto: "" },
+    userLocation: "北京",
   }),
   actions: {
     // 注册
