@@ -1,6 +1,6 @@
 <template>
-  <view style="padding: 0 40rpx">
-    <header-view :has_item="false" />
+  <header-view />
+  <view :style="{ padding: `${top + height}px 40rpx 100rpx 40rpx` }">
     <view class="h_firstwrap h_flex">
       <view class="h_location h_flex">{{ location }}</view>
       <view class="h_search h_flex">
@@ -41,6 +41,7 @@
       </y-card>
     </template>
   </view>
+  <nav-bar />
 </template>
 
 <script setup lang="ts">
@@ -49,6 +50,7 @@ import HeaderView from "@/components/HeaderView.vue";
 import YCarousel from "@/components/YunBase/YCarousel/YCarousel.vue";
 import CardCarousel from "@/components/YunBase/YCarousel/CardCarousel.vue";
 import YCard from "@/components/YunBase/YFeatureCard/YCard.vue";
+import NavBar from "@/components/NavBar.vue";
 import useUserStore from "@/stores/user";
 import useHomeStore from "@/stores/home";
 import type { IRecommend } from "@/includes/Home.interface";
@@ -57,6 +59,7 @@ import { TeaFile } from "@/includes/GiteaImageDisk";
 
 const store = useUserStore();
 const homeStore = useHomeStore();
+const { height, top } = uni.getMenuButtonBoundingClientRect();
 
 let info = reactive(homeStore.topRecommend);
 let info1 = reactive(homeStore.bottomRecommend);

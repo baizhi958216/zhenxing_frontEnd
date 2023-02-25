@@ -26,7 +26,7 @@ withDefaults(
   }>(),
   {
     title: "",
-    background: "",
+    background: "white",
     has_item: false,
   }
 );
@@ -36,6 +36,10 @@ const { height, top } = uni.getMenuButtonBoundingClientRect();
 .h_wrap {
   display: flex;
   justify-content: center;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  z-index: 1000;
   .h_wrap_items {
     position: absolute;
     width: 100vw;
