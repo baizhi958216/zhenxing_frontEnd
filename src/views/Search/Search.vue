@@ -1,7 +1,7 @@
 <template>
   <header-view :has_item="true" :has_back="hasBack" custom>
     <template #h_custom>
-      <y-input :width="330" :height="55" placeholder="中秋节的好去处" />
+      <y-input :width="250" :height="55" placeholder="中秋节的好去处" />
     </template>
   </header-view>
   <view :style="{ padding: `${top + height}px 40rpx 100rpx 40rpx` }">

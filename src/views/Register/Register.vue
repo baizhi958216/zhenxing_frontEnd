@@ -15,6 +15,8 @@
           <view>用户名</view>
           <y-input
             name="username"
+            :height="80"
+            :width="472"
             :value="username"
             placeholder="用户名"
             @i_changeVal="i_username"
@@ -24,6 +26,8 @@
           <view>账号</view>
           <y-input
             name="account"
+            :height="80"
+            :width="472"
             :value="account"
             placeholder="手机号/邮箱"
             @i_changeVal="i_account"
@@ -33,6 +37,7 @@
           <view>密码</view>
           <y-input
             name="password"
+            :height="80"
             :width="400"
             :value="password"
             :password="true"
@@ -44,6 +49,7 @@
           <view>确认密码</view>
           <y-input
             name="repassword"
+            :height="80"
             :width="400"
             :value="repassword"
             :password="true"

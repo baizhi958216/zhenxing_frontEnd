@@ -18,12 +18,15 @@
             :value="account"
             placeholder="手机号/邮箱"
             @i_changeVal="i_account"
+            :height="80"
+            :width="472"
           />
         </view>
         <view style="margin-bottom: 80rpx">
           <view>密码</view>
           <y-input
             name="password"
+            :height="80"
             :width="400"
             :value="password"
             :password="true"

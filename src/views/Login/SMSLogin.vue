@@ -14,6 +14,8 @@
         <view style="margin-bottom: 60rpx">
           <y-input
             name="phone"
+            :height="80"
+            :width="400"
             :value="phone"
             placeholder="请输入手机号"
             @i_changeVal="i_phone"
@@ -22,6 +24,7 @@
         <view style="margin-bottom: 60rpx">
           <y-input
             name="sms_auth"
+            :height="80"
             :width="400"
             :value="sms_auth"
             placeholder="请输入验证码"

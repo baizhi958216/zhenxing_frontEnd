@@ -145,7 +145,7 @@ const toSearch = (searchRecommend: string) => {
   });
 };
 
-if (!homeStore.topRecommend.length) {
+if (!homeStore.topRecommend.length && store.userLoggedIn) {
   getRecommend();
 }
 
