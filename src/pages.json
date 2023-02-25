@@ -9,6 +9,7 @@
     {
       "path": "views/Home/Home",
       "style": {
+        "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true
       }
     },
@@ -25,10 +26,16 @@
       "path": "views/Attractions/Detail/Detail"
     },
     {
-      "path": "views/Search/Search"
+      "path": "views/Search/Search",
+      "style": {
+        "navigationBarTextStyle": "black"
+      }
     },
     {
-      "path": "views/Message/Message"
+      "path": "views/Message/Message",
+      "style": {
+        "navigationBarTextStyle": "black"
+      }
     }
   ],
   "globalStyle": {
