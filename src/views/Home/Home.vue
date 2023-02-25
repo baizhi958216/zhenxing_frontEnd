@@ -27,6 +27,19 @@
       select-dot-background="#575759"
       :dotstyle="'round'"
     />
+    <view style="font-weight: bold; margin: 20rpx 0">最新推荐</view>
+    <template v-for="info in info1" :key="info.sid">
+      <y-card
+        inner
+        width="100%"
+        height="240rpx"
+        round
+        :img-src="info.background"
+      >
+        <template #title>{{ info.title }}</template>
+        <template #desc>{{ info.desc }}</template>
+      </y-card>
+    </template>
   </view>
 </template>
 
@@ -35,6 +48,7 @@ import { onLoad } from "@dcloudio/uni-app";
 import HeaderView from "@/components/HeaderView.vue";
 import YCarousel from "@/components/YunBase/YCarousel/YCarousel.vue";
 import CardCarousel from "@/components/YunBase/YCarousel/CardCarousel.vue";
+import YCard from "@/components/YunBase/YFeatureCard/YCard.vue";
 import useUserStore from "@/stores/user";
 import useHomeStore from "@/stores/home";
 import type { IRecommend } from "@/includes/Home.interface";
@@ -45,6 +59,7 @@ const store = useUserStore();
 const homeStore = useHomeStore();
 
 let info = reactive(homeStore.topRecommend);
+let info1 = reactive(homeStore.bottomRecommend);
 const location = ref(store.userLocation);
 const searchRecommend = ref("中秋节的好去处");
 const featureItems = reactive([
@@ -105,7 +120,7 @@ onLoad(() => {
                   background: `url(${
                     import.meta.env.VITE_BACKEND_URL
                   }/common/download/?name=${el.irPho})`,
-                } as never);
+                });
                 break;
               case "down":
                 homeStore.bottomRecommend.push({
@@ -113,7 +128,9 @@ onLoad(() => {
                   background: `url(${
                     import.meta.env.VITE_BACKEND_URL
                   }/common/download/?name=${el.irPho})`,
-                } as never);
+                  title: el.irTitle,
+                  desc: el.irIntroduce,
+                });
                 break;
               default:
                 break;

@@ -3,8 +3,10 @@ import { defineStore } from "pinia";
 
 export default defineStore("home", {
   state: () => ({
-    topRecommend: [],
-    bottomRecommend: [],
+    topRecommend: <Array<{ sid: string; background: string }>>[],
+    bottomRecommend: <
+      Array<{ sid: string; background: string; title: string; desc: string }>
+    >[],
   }),
   actions: {
     // 获取推荐
