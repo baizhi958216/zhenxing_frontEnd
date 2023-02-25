@@ -111,32 +111,38 @@ const featureItems = reactive([
 
 const getRecommend = async () => {
   await homeStore.getRecommend().then((res: IRecommend) => {
-    res.data.map((el) => {
-      if (el.recommendLocation) {
-        switch (el.recommendLocation) {
-          case "up":
-            homeStore.topRecommend.push({
-              sid: el.sid,
-              background: `url(${
-                import.meta.env.VITE_BACKEND_URL
-              }/common/download/?name=${el.irPho})`,
-            });
-            break;
-          case "down":
-            homeStore.bottomRecommend.push({
-              sid: el.sid,
-              background: `url(${
-                import.meta.env.VITE_BACKEND_URL
-              }/common/download/?name=${el.irPho})`,
-              title: el.irTitle,
-              desc: el.irIntroduce,
-            });
-            break;
-          default:
-            break;
+    if (res.data) {
+      res.data.map((el) => {
+        if (el.recommendLocation) {
+          switch (el.recommendLocation) {
+            case "up":
+              homeStore.topRecommend.push({
+                sid: el.sid,
+                background: `url(${
+                  import.meta.env.VITE_BACKEND_URL
+                }/common/download/?name=${el.irPho})`,
+              });
+              break;
+            case "down":
+              homeStore.bottomRecommend.push({
+                sid: el.sid,
+                background: `url(${
+                  import.meta.env.VITE_BACKEND_URL
+                }/common/download/?name=${el.irPho})`,
+                title: el.irTitle,
+                desc: el.irIntroduce,
+              });
+              break;
+            default:
+              break;
+          }
         }
-      }
-    });
+      });
+    } else {
+      uni.reLaunch({
+        url: "/views/Login/Login",
+      });
+    }
   });
 };
 const toSearch = (searchRecommend: string) => {
