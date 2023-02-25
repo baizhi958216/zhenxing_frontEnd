@@ -66,7 +66,13 @@ const toSearch = () => {
   }
 };
 const toMessage = () => {
-  console.log("toMessage");
+  if (getCurrentPages()[0].route != "views/Message/Message") {
+    uni.redirectTo({
+      url: "/views/Message/Message",
+    });
+  } else {
+    return;
+  }
 };
 const toMe = () => {
   console.log("toMe");

@@ -26,6 +26,9 @@
     },
     {
       "path": "views/Search/Search"
+    },
+    {
+      "path": "views/Message/Message"
     }
   ],
   "globalStyle": {
