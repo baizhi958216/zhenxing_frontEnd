@@ -3,11 +3,11 @@
   <view :style="{ padding: `${top + height}px 40rpx 100rpx 40rpx` }">
     <view class="h_firstwrap h_flex">
       <view class="h_location h_flex">{{ location }}</view>
-      <view class="h_search h_flex">
+      <view class="h_search h_flex" @click="toSearch(searchRecommend)">
         <uni-icons type="search" size="20" color="#cac8d5"></uni-icons>
-        <view style="color: #cac8d5; margin-left: 10rpx">{{
-          searchRecommend
-        }}</view>
+        <view style="color: #cac8d5; margin-left: 10rpx">
+          {{ searchRecommend }}
+        </view>
       </view>
     </view>
     <y-carousel
@@ -59,6 +59,16 @@ import { TeaFile } from "@/includes/GiteaImageDisk";
 
 const store = useUserStore();
 const homeStore = useHomeStore();
+
+onLoad(() => {
+  if (!store.userLoggedIn) {
+    uni.reLaunch({
+      url: "/views/Login/Login",
+    });
+    return;
+  }
+});
+
 const { height, top } = uni.getMenuButtonBoundingClientRect();
 
 let info = reactive(homeStore.topRecommend);
@@ -99,50 +109,42 @@ const featureItems = reactive([
   },
 ]);
 
-onLoad(() => {
-  if (!store.userLoggedIn) {
-    uni.reLaunch({
-      url: "/views/Login/Login",
+const toSearch = (searchRecommend: string) => {
+  uni.navigateTo({
+    url: `/views/Search/Search?recommend=${searchRecommend}`,
+  });
+};
+
+if (!homeStore.topRecommend.length) {
+  homeStore.getRecommend().then((res: IRecommend) => {
+    res.data.map((el) => {
+      if (el.recommendLocation) {
+        switch (el.recommendLocation) {
+          case "up":
+            homeStore.topRecommend.push({
+              sid: el.sid,
+              background: `url(${
+                import.meta.env.VITE_BACKEND_URL
+              }/common/download/?name=${el.irPho})`,
+            });
+            break;
+          case "down":
+            homeStore.bottomRecommend.push({
+              sid: el.sid,
+              background: `url(${
+                import.meta.env.VITE_BACKEND_URL
+              }/common/download/?name=${el.irPho})`,
+              title: el.irTitle,
+              desc: el.irIntroduce,
+            });
+            break;
+          default:
+            break;
+        }
+      }
     });
-    return;
-  }
-  store
-    .authenticate({
-      user_account: store.userData.userPhone,
-      user_psw: store.userData.userPwd,
-    })
-    .then((res) => {
-      uni.setStorageSync("JSESSIONID", res.res.cookies[0]);
-      homeStore.getRecommend().then((res: IRecommend) => {
-        res.data.map((el) => {
-          if (el.recommendLocation) {
-            switch (el.recommendLocation) {
-              case "up":
-                homeStore.topRecommend.push({
-                  sid: el.sid,
-                  background: `url(${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/common/download/?name=${el.irPho})`,
-                });
-                break;
-              case "down":
-                homeStore.bottomRecommend.push({
-                  sid: el.sid,
-                  background: `url(${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/common/download/?name=${el.irPho})`,
-                  title: el.irTitle,
-                  desc: el.irIntroduce,
-                });
-                break;
-              default:
-                break;
-            }
-          }
-        });
-      });
-    });
-});
+  });
+}
 </script>
 
 <style scoped lang="scss">
