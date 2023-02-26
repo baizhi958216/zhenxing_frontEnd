@@ -77,7 +77,7 @@ const { height, top } = uni.getMenuButtonBoundingClientRect();
 
 let info = reactive(homeStore.topRecommend);
 let info1 = reactive(homeStore.bottomRecommend);
-const location = ref();
+const location = ref(store.userLocation[2]);
 const searchRecommend = ref("中秋节的好去处");
 const featureItems = reactive([
   {
