@@ -19,9 +19,9 @@
       </view>
       <uni-icons color="black" type="right" size="20"></uni-icons>
     </view>
-    <view class="ep_feature">
+    <view class="ep_feature" @click="changeName">
       <view>昵称</view>
-      <view class="ep_profile">{{ userStore.userData.userName }}</view>
+      <view class="ep_profile">{{ userName }}</view>
       <uni-icons color="black" type="right" size="20"></uni-icons>
     </view>
     <view class="ep_feature">
@@ -50,11 +50,16 @@ const { height, top } = uni.getMenuButtonBoundingClientRect();
 const userStore = useUserStore();
 
 const userPhoto = ref(userStore.userData.userPhoto);
+const userName = ref(userStore.userData.userName);
 
 const changePhoto = async () => {
   await UploadImage()
     .then((res) => {
-      userStore.updateuser(res.data);
+      userStore.updateuser({
+        userName: userName.value,
+        userPhoto: res.data,
+        photo: true,
+      });
     })
     .catch(() => {
       uni.showModal({
@@ -68,6 +73,24 @@ const changePhoto = async () => {
       url: "/subs/User/EditProfile",
     });
   }, 2000);
+};
+
+const changeName = () => {
+  uni.showModal({
+    editable: true,
+    title: "修改昵称",
+    placeholderText: userName.value,
+    success: async (val) => {
+      if (val.content) {
+        await userStore.updateuser({
+          userName: val.content,
+          userPhoto: userPhoto.value,
+          photo: false,
+        });
+        userName.value = userStore.userData.userName;
+      }
+    },
+  });
 };
 </script>
 

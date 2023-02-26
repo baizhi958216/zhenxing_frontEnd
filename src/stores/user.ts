@@ -82,23 +82,37 @@ export default defineStore("user", {
     },
 
     // 更新用户信息
-    async updateuser(values: string) {
-      await YFetch(
-        "/user",
-        "PUT",
-        {
+    async updateuser(values: {
+      userName: string;
+      userPhoto: string;
+      photo: boolean;
+    }) {
+      let data;
+      if (values.photo) {
+        data = {
           userName: this.userData.userName,
           userPwd: this.userData.userPwd,
-          userPhoto: values,
+          userPhoto: values.userPhoto,
           userPhone: this.userData.userPhone,
-        },
-        {
-          cookie: uni.getStorageSync("JSESSIONID"),
-        }
-      );
-      this.userData.userPhoto = `${
-        import.meta.env.VITE_BACKEND_URL
-      }/common/download/?name=${values}`;
+        };
+      } else {
+        data = {
+          userName: values.userName,
+          userPwd: this.userData.userPwd,
+          userPhoto: this.userData.userPhoto,
+          userPhone: this.userData.userPhone,
+        };
+      }
+      await YFetch("/user", "PUT", data, {
+        cookie: uni.getStorageSync("JSESSIONID"),
+      });
+      if (values.photo) {
+        this.userData.userPhoto = `${
+          import.meta.env.VITE_BACKEND_URL
+        }/common/download/?name=${values.userPhoto}`;
+      } else {
+        this.userData.userName = values.userName;
+      }
     },
     async signOut() {
       this.userLoggedIn = false;
