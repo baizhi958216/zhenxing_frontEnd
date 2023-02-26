@@ -154,10 +154,11 @@ const submit = async () => {
     .then((res) => {
       if (res.code == 1) {
         uni.setStorageSync("JSESSIONID", res.res.cookies[0]);
-        const { userId, userPhoto, userPhone } = res.res.data.data;
+        const { userId, userName, userPhoto, userPhone } = res.res.data.data;
         store.userLoggedIn = true;
         store.userData = {
           userId: userId,
+          userName: userName,
           userPhoto: userPhoto,
           userPhone: userPhone,
           userPwd: password.value as string,

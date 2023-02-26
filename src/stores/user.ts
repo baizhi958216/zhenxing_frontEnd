@@ -11,7 +11,7 @@ export default defineStore("user", {
   state: () => ({
     userLoggedIn: false,
     userAutoLogin: false,
-    userData: { userId: "", userPhone: "", userPwd: "", userPhoto: "" },
+    userData: { userId: "", userName:'', userPhone: "", userPwd: "", userPhoto: "" },
     userLocation: "北京",
   }),
   actions: {
