@@ -2,7 +2,11 @@
   <header-view />
   <view :style="{ padding: `${top + height}px 40rpx 100rpx 40rpx` }">
     <view class="h_firstwrap h_flex">
-      <view class="h_location h_flex">{{ location }}</view>
+      <view class="h_location h_flex">
+        <picker @change="chooseLocation" mode="region">
+          <view class="uni-input">{{ location }}</view>
+        </picker>
+      </view>
       <view class="h_search h_flex" @click="toSearch(searchRecommend)">
         <uni-icons type="search" size="20" color="#cac8d5"></uni-icons>
         <view style="color: #cac8d5; margin-left: 10rpx">
@@ -73,7 +77,7 @@ const { height, top } = uni.getMenuButtonBoundingClientRect();
 
 let info = reactive(homeStore.topRecommend);
 let info1 = reactive(homeStore.bottomRecommend);
-const location = ref(store.userLocation);
+const location = ref();
 const searchRecommend = ref("中秋节的好去处");
 const featureItems = reactive([
   {
@@ -145,6 +149,12 @@ const getRecommend = async () => {
     }
   });
 };
+
+const chooseLocation = (value: any) => {
+  store.userLocation = value.detail.value;
+  location.value = store.userLocation[2];
+  // 选择完成后获取对应推荐
+};
 const toSearch = (searchRecommend: string) => {
   uni.navigateTo({
     url: `/views/Search/Search?recommend=${searchRecommend}`,
@@ -152,6 +162,11 @@ const toSearch = (searchRecommend: string) => {
 };
 
 if (!homeStore.topRecommend.length && store.userLoggedIn) {
+  homeStore.getLocation().then((data) => {
+    const { province, city, district } = data;
+    store.userLocation = [`${province}`, `${city}`, `${district}`];
+    location.value = store.userLocation[2];
+  });
   getRecommend();
 }
 
@@ -182,7 +197,7 @@ onPullDownRefresh(async () => {
   }
   .h_search {
     margin-left: 20rpx;
-    width: 85%;
+    width: 75%;
     height: 60rpx;
     background-color: #f8f7f9;
     border-radius: 50rpx;

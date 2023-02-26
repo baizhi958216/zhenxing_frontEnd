@@ -11,8 +11,14 @@ export default defineStore("user", {
   state: () => ({
     userLoggedIn: false,
     userAutoLogin: false,
-    userData: { userId: "", userName:'', userPhone: "", userPwd: "", userPhoto: "" },
-    userLocation: "北京",
+    userData: {
+      userId: "",
+      userName: "",
+      userPhone: "",
+      userPwd: "",
+      userPhoto: "",
+    },
+    userLocation: <Array<string>>[],
   }),
   actions: {
     // 注册
