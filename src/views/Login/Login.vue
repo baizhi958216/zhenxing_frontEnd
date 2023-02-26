@@ -154,12 +154,16 @@ const submit = async () => {
     .then((res) => {
       if (res.code == 1) {
         uni.setStorageSync("JSESSIONID", res.res.cookies[0]);
-        const { userId, userName, userPhoto, userPhone } = res.res.data.data;
+        const { createTime, userId, userName, userPhoto, userPhone } =
+          res.res.data.data;
         store.userLoggedIn = true;
         store.userData = {
+          createTime: createTime,
           userId: userId,
           userName: userName,
-          userPhoto: userPhoto,
+          userPhoto: `${
+            import.meta.env.VITE_BACKEND_URL
+          }/common/download/?name=${userPhoto}`,
           userPhone: userPhone,
           userPwd: password.value as string,
         };

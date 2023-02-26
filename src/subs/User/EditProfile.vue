@@ -35,6 +35,7 @@
     </view>
     <view class="ep_feature">
       <view>注册时间</view>
+      <view class="ep_profile">{{ userStore.userData.createTime }}</view>
       <uni-icons color="black" type="right" size="20"></uni-icons>
     </view>
   </view>
@@ -82,7 +83,7 @@ const changePhoto = async () => {
 }
 
 .ep_profile {
-  width: 80%;
+  width: 70%;
   text-align: right;
 }
 

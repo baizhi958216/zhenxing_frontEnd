@@ -159,7 +159,10 @@ const toTenants = () => {
 };
 
 const logOut = () => {
-  console.log("登出");
+  userStore.signOut();
+  uni.reLaunch({
+    url: "/views/Login/Login",
+  });
 };
 </script>
 

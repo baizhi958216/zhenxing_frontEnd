@@ -12,6 +12,7 @@ export default defineStore("user", {
     userLoggedIn: false,
     userAutoLogin: false,
     userData: {
+      createTime: "",
       userId: "",
       userName: "",
       userPhone: "",
