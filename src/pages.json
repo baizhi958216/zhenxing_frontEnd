@@ -44,6 +44,19 @@
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "subs",
+      "pages": [
+        {
+          "path": "User/EditProfile",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        }
+      ]
+    }
+  ],
   "globalStyle": {
     "navigationStyle": "custom"
   }

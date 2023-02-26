@@ -17,12 +17,13 @@
       <view class="u_profile">
         <!-- 头像 -->
         <view
-          style="
-            background-color: rgba(0, 0, 0, 0.3);
-            width: 100rpx;
-            height: 100rpx;
-            border-radius: 50%;
-          "
+          :style="{
+            background: `url(${userStore.userData.userPhoto})`,
+            backgroundSize: '100%',
+            width: '100rpx',
+            height: '100rpx',
+            borderRadius: '50%',
+          }"
         ></view>
         <!-- 昵称/联系方式 -->
         <view style="width: 50%">
@@ -144,7 +145,9 @@ onLoad((option) => {
 });
 
 const toProfile = () => {
-  console.log("编辑资料");
+  uni.navigateTo({
+    url: "/subs/User/EditProfile",
+  });
 };
 
 const toFeature = (url: string) => {

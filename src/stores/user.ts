@@ -79,6 +79,26 @@ export default defineStore("user", {
           });
       });
     },
+
+    // 更新用户信息
+    async updateuser(values: string) {
+      await YFetch(
+        "/user",
+        "PUT",
+        {
+          userName: this.userData.userName,
+          userPwd: this.userData.userPwd,
+          userPhoto: values,
+          userPhone: this.userData.userPhone,
+        },
+        {
+          cookie: uni.getStorageSync("JSESSIONID"),
+        }
+      );
+      this.userData.userPhoto = `${
+        import.meta.env.VITE_BACKEND_URL
+      }/common/download/?name=${values}`;
+    },
     async signOut() {
       this.userLoggedIn = false;
     },
