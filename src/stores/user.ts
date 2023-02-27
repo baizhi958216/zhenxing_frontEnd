@@ -20,6 +20,8 @@ export default defineStore("user", {
       userPhoto: "",
     },
     userLocation: <Array<string>>[],
+    userNotice: { toast: true, pm: false, vibration: true },
+    socialBindings: { wechat: true, qq: false, weibo: false },
   }),
   actions: {
     // 注册

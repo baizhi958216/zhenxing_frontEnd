@@ -1,5 +1,9 @@
 <template>
-  <view class="f_wrap" @click="navto(link)">
+  <view
+    class="f_wrap"
+    @click="navto(link)"
+    :style="{ alignItems: `${left ? 'flex-start' : 'center'}` }"
+  >
     <view
       class="f_image"
       :style="{
@@ -32,6 +36,7 @@ withDefaults(
     width?: string;
     height?: string;
     round?: boolean;
+    left?: boolean;
   }>(),
   {
     link: "",
@@ -40,6 +45,7 @@ withDefaults(
     width: "",
     height: "",
     round: false,
+    left: false,
   }
 );
 
@@ -53,7 +59,6 @@ const navto = (link: string) => {
 <style scoped lang="scss">
 .f_wrap {
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
   font-size: 25rpx;

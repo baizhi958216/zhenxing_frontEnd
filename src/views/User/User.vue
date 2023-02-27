@@ -151,7 +151,27 @@ const toProfile = () => {
 };
 
 const toFeature = (url: string) => {
-  console.log(url);
+  switch (url) {
+    case "tz":
+      uni.navigateTo({
+        url: "/subs/User/Notice",
+      });
+      break;
+    case "zh":
+      uni.navigateTo({
+        url: "/subs/User/Settings",
+      });
+      break;
+    case "sc":
+      uni.navigateTo({
+        url: "/subs/User/Collections",
+      });
+      break;
+    default:
+      console.log(url);
+
+      break;
+  }
 };
 
 const toTenants = () => {

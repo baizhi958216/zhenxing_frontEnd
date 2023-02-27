@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import HeaderView from "@/components/HeaderView.vue";
-import { UploadImage } from "@/includes/UploadImage";
+import { UploadImage } from "../includes/UploadImage";
 import useUserStore from "@/stores/user";
 import { ref } from "vue";
 const { height, top } = uni.getMenuButtonBoundingClientRect();

@@ -53,6 +53,24 @@
           "style": {
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "User/Collections",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "User/Notice",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "User/Settings",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }
