@@ -51,7 +51,9 @@ withDefaults(
 
 const navto = (link: string) => {
   if (link) {
-    console.log(link);
+    uni.navigateTo({
+      url: link,
+    });
   }
 };
 </script>

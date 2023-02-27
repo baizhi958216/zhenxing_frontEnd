@@ -83,19 +83,23 @@ const featureItems = reactive([
   {
     list: [
       {
-        link: "news",
+        link: "/subs/ZhenXing/ZhenXing",
         imgSrc: TeaFile("myhome", "xczx.png"),
         title: "乡村振兴",
       },
-      { link: "", imgSrc: TeaFile("myhome", "jjsn.png"), title: "聚焦三农" },
+      {
+        link: "/subs/SanNong/SanNong",
+        imgSrc: TeaFile("myhome", "jjsn.png"),
+        title: "聚焦三农",
+      },
       { link: "", imgSrc: TeaFile("myhome", "szxc.png"), title: "数字乡村" },
       {
-        link: "tourism",
+        link: "/subs/LvYou/LvYou",
         imgSrc: TeaFile("myhome", "xcly.png"),
         title: "乡村旅游",
       },
       {
-        link: "gourmet",
+        link: "/subs/MeiShi/MeiShi",
         imgSrc: TeaFile("myhome", "xcms.png"),
         title: "乡村美食",
       },

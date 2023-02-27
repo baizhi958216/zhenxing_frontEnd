@@ -71,6 +71,30 @@
           "style": {
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "SanNong/SanNong",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "ZhenXing/ZhenXing",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "LvYou/LvYou",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "MeiShi/MeiShi",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }
