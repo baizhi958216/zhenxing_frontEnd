@@ -73,6 +73,12 @@
           }
         },
         {
+          "path": "User/BusinessRegister",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
           "path": "SanNong/SanNong",
           "style": {
             "navigationBarTextStyle": "black"

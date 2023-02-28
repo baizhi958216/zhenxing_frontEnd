@@ -175,7 +175,9 @@ const toFeature = (url: string) => {
 };
 
 const toTenants = () => {
-  console.log("商家注册");
+  uni.navigateTo({
+    url: "/subs/User/BusinessRegister",
+  });
 };
 
 const logOut = () => {
