@@ -85,6 +85,12 @@
           }
         },
         {
+          "path": "ZhenXing/subs/TuiJian/General",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
           "path": "LvYou/LvYou",
           "style": {
             "navigationBarTextStyle": "black"
