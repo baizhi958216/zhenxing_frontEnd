@@ -110,6 +110,12 @@
           "style": {
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "MeiShi/subs/FaXian",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }

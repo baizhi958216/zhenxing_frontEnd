@@ -18,9 +18,15 @@
         <text>
           {{ detail.storeName }}
         </text>
-        <text>
-          {{ detail.score }}
-        </text>
+        <view>
+          <uni-icons
+            type="star-filled"
+            size="25"
+            v-for="i in detail.score"
+            color="#f55951"
+            :key="i"
+          ></uni-icons>
+        </view>
       </view>
       <!-- TODO: 推荐餐厅 -->
       <view class="canteen_recom" v-if="false">
@@ -62,14 +68,10 @@ onLoad((options) => {
   ).then((res) => {
     const { storeName, score, storeIntroduce, spho } = res.data
       .data[0] as IMeiShi;
-    let score1 = "";
     let spho1 = [];
     spho1 = spho!.split(",");
-    for (let index = 0; index < score!; index++) {
-      score1 += "⭐";
-    }
     detail.value = {
-      score: score1,
+      score: score,
       storeName: storeName,
       storeIntroduce: storeIntroduce,
       spho: `${import.meta.env.VITE_BACKEND_URL}/common/download/?name=${

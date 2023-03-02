@@ -1,4 +1,11 @@
-export type IMeiShi = {
+interface IStore {
+  storeId: string;
+  storeName: string;
+  score: number;
+  storeMainFee: number;
+  spho: string;
+}
+interface IMeiShi {
   createTime?: string;
   isDelete?: number;
   score?: number | string;
@@ -20,4 +27,5 @@ export type IMeiShi = {
   storeType?: string;
   uid?: string;
   updateTime?: string;
-};
+}
+export type { IStore, IMeiShi };

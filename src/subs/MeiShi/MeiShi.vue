@@ -31,7 +31,9 @@
         <view>价格排序</view>
       </view>
       <!-- 发现美食 -->
-      <view class="ms_seek">发现美食</view>
+      <navigator url="/subs/MeiShi/subs/FaXian">
+        <view class="ms_seek">发现美食</view>
+      </navigator>
     </view>
     <!-- 列表 绑定排序菜单-->
     <view class="ms_list">
@@ -65,16 +67,9 @@
 </template>
 <script setup lang="ts">
 import HeaderView from "@/components/HeaderView.vue";
+import type { IStore } from "@/includes/MeiShi.interface";
 import { YFetch } from "@/includes/YFetch";
 import { reactive, ref } from "vue";
-
-interface IStore {
-  storeId: string;
-  storeName: string;
-  score: number;
-  storeMainFee: number;
-  spho: string;
-}
 
 const { height, top } = uni.getMenuButtonBoundingClientRect();
 
