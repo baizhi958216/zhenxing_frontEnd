@@ -23,9 +23,6 @@
       "path": "views/Login/SMSLogin"
     },
     {
-      "path": "views/Attractions/Detail/Detail"
-    },
-    {
       "path": "views/Search/Search",
       "style": {
         "navigationBarTextStyle": "black"
@@ -104,6 +101,12 @@
         },
         {
           "path": "MeiShi/MeiShi",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "MeiShi/subs/XiangQing",
           "style": {
             "navigationBarTextStyle": "black"
           }

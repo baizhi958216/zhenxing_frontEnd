@@ -81,7 +81,7 @@ const change = (e: { detail: { current: number } }) => {
 
 const navto = (sid: string) => {
   uni.navigateTo({
-    url: `/views/Attractions/Detail/Detail?sid=${sid}`,
+    url: `/subs/ZhenXing/subs/TuiJian/General?sid=${sid}`,
   });
 };
 </script>

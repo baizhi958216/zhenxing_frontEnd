@@ -79,12 +79,14 @@ interface IStore {
 const { height, top } = uni.getMenuButtonBoundingClientRect();
 
 const topRecommend = ref({
-  sid: "2",
+  sid: "1568079759376211969",
   url: "https://tuchuangs.com/imgs/2022/05/26/5cd30fe855924bab.png",
 });
 
 const toDetail = (sid: string) => {
-  console.log(sid);
+  uni.navigateTo({
+    url: `/subs/MeiShi/subs/XiangQing?sid=${sid}`,
+  });
 };
 
 const meishiList = reactive<Array<IStore>>([]);
