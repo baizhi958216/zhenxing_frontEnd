@@ -45,7 +45,7 @@
             <view class="sn_multiPic" v-else-if="info.style == 'multiPic'">
               <view class="sn_multiPic_title">{{ info.title }}</view>
               <view class="sn_multiPic_list">
-                <view v-for="img in info.imgSrc" class="sn_multiPic_pic"></view>
+                <view v-for="img,index in info.imgSrc" :key="index" class="sn_multiPic_pic"></view>
               </view>
               <view class="sn_multiPic_author">{{ info.author }}</view>
             </view>
