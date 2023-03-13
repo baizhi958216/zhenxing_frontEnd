@@ -103,7 +103,11 @@ const featureItems = reactive([
         imgSrc: TeaFile("myhome", "xcms.png"),
         title: "乡村美食",
       },
-      { link: "", imgSrc: TeaFile("myhome", "jdzs.png"), title: "酒店住宿" },
+      {
+        link: "/subs/JiuDian/JiuDian",
+        imgSrc: TeaFile("myhome", "jdzs.png"),
+        title: "酒店住宿",
+      },
       { link: "", imgSrc: TeaFile("myhome", "zxzk.png"), title: "振兴智库" },
       { link: "", imgSrc: TeaFile("myhome", "dygb.png"), title: "党员干部" },
       { link: "", imgSrc: TeaFile("myhome", "fwqz.png"), title: "服务群众" },

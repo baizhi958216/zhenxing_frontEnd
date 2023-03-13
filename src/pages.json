@@ -116,6 +116,18 @@
           "style": {
             "navigationBarTextStyle": "black"
           }
+        },
+        {
+          "path": "JiuDian/JiuDian",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
+        },
+        {
+          "path": "JiuDian/sub/XiangQing",
+          "style": {
+            "navigationBarTextStyle": "black"
+          }
         }
       ]
     }
