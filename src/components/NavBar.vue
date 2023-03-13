@@ -46,19 +46,10 @@ const navs = reactive(<Array<{ url: string; bg: string; size: string }>>[
   },
 ]);
 const toNav = (url: string) => {
-  if (getCurrentPages()[0].route != url) {
-    if (url == "views/Search/Search" || url == "views/User/User") {
-      uni.redirectTo({
-        url: `/${url}?back=false`,
-      });
-    } else {
-      uni.redirectTo({
-        url: `/${url}`,
-      });
-    }
-  } else {
-    return;
-  }
+  if (getCurrentPages()[0].route != url)
+    uni.reLaunch({
+      url: `/${url}?back=false`,
+    });
 };
 </script>
 
