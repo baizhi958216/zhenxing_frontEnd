@@ -33,7 +33,7 @@
         <view>{{ item.title }}</view>
       </view>
     </view>
-    <view class="m_messageswrap">
+    <view class="m_messageswrap" v-if="messageList.length">
       <view class="message-item" v-for="item in messageList" :key="item.name">
         <view
           class="userimage"
@@ -57,6 +57,9 @@
           </view>
         </view>
       </view>
+    </view>
+    <view class="m_chatgpt" v-else>
+      <view class="m_gpt" @click="chatgpt">Chat GPT</view>
     </view>
   </view>
   <nav-bar />
@@ -83,16 +86,22 @@ const toFeature = (feature: string) => {
   console.log(feature);
 };
 
-uni.connectSocket({
-  url: import.meta.env.VITE_BACKEND_WEBSOCKET,
-});
-uni.onSocketOpen(() => {
-  message.getMessages();
-});
+// uni.connectSocket({
+//   url: import.meta.env.VITE_BACKEND_WEBSOCKET,
+// });
+// uni.onSocketOpen(() => {
+//   message.getMessages();
+// });
 
 setTimeout(() => {
   messageList.value = message.messages;
 }, 500);
+
+const chatgpt = () => {
+  uni.navigateTo({
+    url: "/views/Message/GptMessage",
+  });
+};
 </script>
 
 <style scoped lang="scss">
@@ -164,6 +173,18 @@ setTimeout(() => {
         border-radius: 50%;
       }
     }
+  }
+}
+.m_chatgpt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600rpx;
+  .m_gpt {
+    background-color: #70a5ff;
+    padding: 20rpx;
+    border-radius: 30rpx;
+    color: rgba(255, 255, 255, 0.849);
   }
 }
 </style>
